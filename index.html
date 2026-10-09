@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed & Rahma | Wedding Invitation</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Great+Vibes&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2b030d 0%, #4a0718 50%, #2b030d 100%);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-x: hidden;
+  color: #f5ebe0;
+}
+
+/* Wrapper */
+.container {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hint-text {
+  color: #e6ccb2;
+  font-size: 15px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  animation: pulse 2s infinite;
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Envelope Container */
+.envelope-wrapper {
+  position: relative;
+  width: 100%;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+/* Base Envelope */
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  background: #eddcd2;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+  border: 1px solid #ddbea9;
+  transition: all 0.6s ease-in-out;
+}
+
+/* Envelope Flap Top */
+.flap-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 220px solid transparent;
+  border-right: 220px solid transparent;
+  border-top: 150px solid #ddbea9;
+  transform-origin: top;
+  transition: transform 0.6s ease-in-out, z-index 0.6s;
+  z-index: 5;
+}
+
+/* Envelope Pocket Body */
+.pocket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 220px solid #e8d5c8;
+  border-right: 220px solid #e8d5c8;
+  border-bottom: 150px solid #d8c2b0;
+  border-radius: 0 0 12px 12px;
+  z-index: 3;
+}
+
+/* Wax Seal */
+.wax-seal {
+  position: absolute;
+  top: 130px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65px;
+  height: 65px;
+  background: radial-gradient(circle, #651126 0%, #3b0715 100%);
+  border-radius: 50%;
+  border: 2px dashed #b76e79;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eddcd2;
+  font-family: 'Great Vibes', cursive;
+  font-size: 24px;
+  z-index: 6;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Invitation Card Inside */
+.card {
+  position: relative;
+  background: #fffdfa;
+  border-radius: 16px;
+  padding: 35px 20px;
+  text-align: center;
+  border: 2px solid #ddbea9;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  color: #4a0718;
+  width: 100%;
+  max-width: 420px;
+  margin-top: 20px;
+  overflow: hidden;
+  display: none; /* Shown when opened */
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Open Envelope Animation States */
+.open .flap-top {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.open .wax-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  pointer-events: none;
+}
+
+/* Floral Corner Accents */
+.floral-corner {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  pointer-events: none;
+  opacity: 0.75;
+}
+.floral-tl { top: 5px; left: 5px; }
+.floral-tr { top: 5px; right: 5px; transform: scaleX(-1); }
+.floral-bl { bottom: 5px; left: 5px; transform: scaleY(-1); }
+.floral-br { bottom: 5px; right: 5px; transform: scale(-1); }
+
+/* Card Content Typography */
+.top-title {
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #8c5383;
+  margin-bottom: 5px;
+}
+
+.sub-title {
+  font-size: 16px;
+  font-style: italic;
+  color: #6b3a43;
+  margin-bottom: 12px;
+}
+
+.names {
+  font-family: 'Great Vibes', cursive;
+  font-size: 46px;
+  color: #4a0718;
+  margin: 10px 0;
+  line-height: 1.1;
+}
+
+.names span {
+  color: #b76e79;
+  font-size: 34px;
+}
+
+.divider-line {
+  width: 70px;
+  height: 1px;
+  background: #ddbea9;
+  margin: 15px auto;
+}
+
+.invite-message {
+  font-size: 17px;
+  line-height: 1.5;
+  color: #5c2c35;
+  margin-bottom: 20px;
+}
+
+.date-box {
+  background: #f7ede2;
+  border-top: 1px solid #ddbea9;
+  border-bottom: 1px solid #ddbea9;
+  padding: 12px 5px;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: #4a0718;
+  margin: 15px 0;
+}
+
+.time-loc {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+.time-loc div strong {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #8c5383;
+}
+
+.time-loc div span {
+  color: #4a0718;
+  font-weight: 600;
+}
+
+/* Countdown Timer */
+.countdown-section {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px dashed #ddbea9;
+}
+
+.countdown-title {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8c5383;
+  margin-bottom: 12px;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.time-box {
+  background: #4a0718;
+  color: #f5ebe0;
+  padding: 10px 8px;
+  border-radius: 8px;
+  min-width: 58px;
+  box-shadow: 0 4px 10px rgba(74, 7, 24, 0.3);
+}
+
+.time-box strong {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.time-box small {
+  font-size: 10px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+/* Location Button */
+.btn-location {
+  display: inline-block;
+  margin-top: 25px;
+  background: #4a0718;
+  color: #f5ebe0;
+  text-decoration: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border: 1px solid #b76e79;
+}
+
+.btn-location:hover {
+  background: #651126;
+  transform: translateY(-2px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="hint-text" id="hint">✉ Click to Open Invitation</div>
+
+  <!-- Envelope Area -->
+  <div class="envelope-wrapper" id="envelopeWrapper" onclick="openEnvelope()">
+    <div class="envelope" id="envelope">
+      <div class="flap-top"></div>
+      <div class="pocket"></div>
+      <div class="wax-seal">M♥R</div>
+    </div>
+  </div>
+
+  <!-- Invitation Card (Revealed after opening) -->
+  <div class="card" id="invitationCard">
+    
+    <!-- SVG Floral Accents in Corners -->
+    <svg class="floral-corner floral-tl" viewBox="0 0 100 100" fill="none" stroke="#b76e79" stroke-width="1.5">
+      <path d="M10,10 C30,10 50,20 60,40 C50,30 30,30 10,10 Z M10,10 C10,30 20,50 40,60 C30,50 30,30 10,10 Z"/>
+      <circle cx="25" cy="25" r="4" fill="#ddbea9"/>
+    </svg>
+    <svg class="floral-corner floral-tr" viewBox="0 0 100 100" fill="none" stroke="#b76e79" stroke-width="1.5">
+      <path d="M10,10 C30,10 50,20 60,40 C50,30 30,30 10,10 Z M10,10 C10,30 20,50 40,60 C30,50 30,30 10,10 Z"/>
+      <circle cx="25" cy="25" r="4" fill="#ddbea9"/>
+    </svg>
+    <svg class="floral-corner floral-bl" viewBox="0 0 100 100" fill="none" stroke="#b76e79" stroke-width="1.5">
+      <path d="M10,10 C30,10 50,20 60,40 C50,30 30,30 10,10 Z M10,10 C10,30 20,50 40,60 C30,50 30,30 10,10 Z"/>
+      <circle cx="25" cy="25" r="4" fill="#ddbea9"/>
+    </svg>
+    <svg class="floral-corner floral-br" viewBox="0 0 100 100" fill="none" stroke="#b76e79" stroke-width="1.5">
+      <path d="M10,10 C30,10 50,20 60,40 C50,30 30,30 10,10 Z M10,10 C10,30 20,50 40,60 C30,50 30,30 10,10 Z"/>
+      <circle cx="25" cy="25" r="4" fill="#ddbea9"/>
+    </svg>
+
+    <div class="top-title">Wedding Invitation</div>
+    <div class="sub-title">Together with their families</div>
+
+    <div class="names">
+      Mohamed <span>&</span> Rahma
+    </div>
+
+    <div class="divider-line"></div>
+
+    <p class="invite-message">
+      Joyfully invite you to celebrate with them<br>
+      as they begin their forever together.
+    </p>
+
+    <div class="date-box">
+      Saturday &nbsp;·&nbsp; 07 &nbsp;·&nbsp; November &nbsp;·&nbsp; 2026
+    </div>
+
+    <div class="time-loc">
+      <div>
+        <strong>Time</strong>
+        <span>8:00 PM</span>
+      </div>
+      <div>
+        <strong>Location</strong>
+        <span>Zagazig, Egypt</span>
+      </div>
+    </div>
+
+    <!-- Countdown Timer Section -->
+    <div class="countdown-section">
+      <div class="countdown-title">Counting Down To Forever</div>
+      <div class="timer">
+        <div class="time-box">
+          <strong id="days">00</strong>
+          <small>Days</small>
+        </div>
+        <div class="time-box">
+          <strong id="hours">00</strong>
+          <small>Hours</small>
+        </div>
+        <div class="time-box">
+          <strong id="minutes">00</strong>
+          <small>Minutes</small>
+        </div>
+        <div class="time-box">
+          <strong id="seconds">00</strong>
+          <small>Seconds</small>
+        </div>
+      </div>
+    </div>
+
+    <a class="btn-location" href="https://maps.app.goo.gl/2SJYWWCpPZkUzKSf7" target="_blank">
+      📍 View Location On Map
+    </a>
+
+  </div>
+
+</div>
+
+<script>
+function openEnvelope() {
+  const envelope = document.getElementById('envelope');
+  const card = document.getElementById('invitationCard');
+  const hint = document.getElementById('hint');
+  const wrapper = document.getElementById('envelopeWrapper');
+
+  if (!envelope.classList.contains('open')) {
+    envelope.classList.add('open');
+    hint.style.display = 'none';
+
+    setTimeout(() => {
+      wrapper.style.display = 'none';
+      card.style.display = 'block';
+    }, 700);
+  }
+}
+
+// Countdown Calculation Script
+const weddingDate = new Date("2026-11-07T20:00:00+02:00").getTime();
+
+function updateCountdown(){
+  const now = Date.now();
+  let diff = weddingDate - now;
+
+  if(diff <= 0){
+    document.getElementById("days").textContent = "00";
+    document.getElementById("hours").textContent = "00";
+    document.getElementById("minutes").textContent = "00";
+    document.getElementById("seconds").textContent = "00";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById("days").textContent = String(days).padStart(2, "0");
+  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+  document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
